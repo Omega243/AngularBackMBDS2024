@@ -1,6 +1,6 @@
-let mongoose = require('mongodb');
+let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
-var aggregatePaginate = require('mongoose-aggregate-paginate-v2');
+const mongoosePaginate = require('mongoose-aggregate-paginate-v2');
 
 let UserSchema = Schema({
     nom:{
@@ -11,4 +11,5 @@ let UserSchema = Schema({
     role:String
 });
 
+UserSchema.plugin(mongoosePaginate);
 module.exports = mongoose.model('users', UserSchema)

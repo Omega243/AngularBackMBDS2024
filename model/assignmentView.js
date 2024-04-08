@@ -1,6 +1,6 @@
-let mongoose = require('mongodb');
+let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
-var aggregatePaginate = require('mongoose-aggregate-paginate-v2');
+const mongoosePaginate = require('mongoose-aggregate-paginate-v2');
 
 let AssignmentViewSchema = Schema({
     dateDeRendu: Date,
@@ -18,6 +18,6 @@ let AssignmentViewSchema = Schema({
     }
 });
 
-AssignmentViewSchema.plugin(aggregatePaginate);
+AssignmentViewSchema.plugin(mongoosePaginate);
 
-module.exports = mongoose.model('assignmentsView', AssignmentViewSchema)
+module.exports = mongoose.model('assignmentsView', AssignmentViewSchema, 'assignmentsView')

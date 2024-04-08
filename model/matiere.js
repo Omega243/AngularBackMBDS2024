@@ -8,6 +8,6 @@ let MatiereSchema = Schema({
     idProf: mongoose.Schema.Types.ObjectId
 });
 
-subjectSchema.plugin(aggregatePaginate);
+MatiereSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('matieres', MatiereSchema)

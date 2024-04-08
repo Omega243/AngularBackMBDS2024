@@ -4,7 +4,7 @@ let bodyParser = require('body-parser');
 let assignment = require('./routes/assignments');
 let assignmentV = require('./routes/assignmentView');
 let user = require('./routes/users');
-let user = require('./model/User');
+let User = require('./model/User');
 let matiere = require('./routes/matieres');
 
 let mongoose = require('mongoose');
