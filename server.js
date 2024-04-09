@@ -7,7 +7,6 @@ let mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 // mongoose.set('debug', true);
 
-// remplacer toute cette chaine par l'URI de connexion à votre propre base dans le cloud s
 const uri = 'mongodb+srv://nandrianinaomega:miagembds@cluster0.vkxoifz.mongodb.net/assignments?retryWrites=true&w=majority&appName=Cluster0';
 const options = {
   useNewUrlParser: true,
@@ -42,6 +41,8 @@ let port = process.env.PORT || 8010;
 
 // les routes
 const prefix = '/api';
+
+app.use(prefix + '/users', require('./routes/users'));
 
 // http://serveur..../assignments
 app.route(prefix + '/assignments')
