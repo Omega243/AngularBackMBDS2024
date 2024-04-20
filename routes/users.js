@@ -40,4 +40,4 @@ function getUserById(req, res) {
     });
 }
 
-module.exports = { getUsersByRole, getUserById, router };
+module.exports = { router, getUsersByRole, getUserById };

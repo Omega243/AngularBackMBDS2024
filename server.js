@@ -46,7 +46,7 @@ let port = process.env.PORT || 8010;
 // les routes
 const prefix = '/api';
 
-app.use(prefix + '/users', require('./routes/users'));
+//app.use(prefix + '/users', require('./routes/users'));
 
 // http://serveur..../assignments
 app.route(prefix + '/assignments')
