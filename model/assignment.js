@@ -7,10 +7,7 @@ let AssignmentSchema = Schema({
     dateDeRendu: Date,
     nom: String,
     rendu: Boolean,
-    note: Number,
-    remarque: String,
-    idMatiere: mongoose.Schema.Types.ObjectId,
-    idEleve: mongoose.Schema.Types.ObjectId
+    
 });
 
 AssignmentSchema.plugin(mongoosePaginate);

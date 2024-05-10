@@ -1,43 +1,38 @@
-var express = require('express');
-var router = express.Router();
 var User = require("../model/User");
+const bcrypt = require('bcrypt');
 
-const { login, register, logout } = require('../service/UserService') ;
+async function creerUtilisateur(req, res) {
+  let user = new User();
+  user.nom = req.body.nom;
+  user.prenom = req.body.prenom;
+  user.email = req.body.email;
+  user.mdp = await BCrypt.hash(req.body.mdp, 10);
+  user.role = req.body.role;
 
-/* LOGIN */
-router.post('/login', login) ;
-
-/* INSCRIPTION */
-router.post('/register', register) ;
-
-/* LOGOUT */
-router.post('/logout', logout) ;
-
-/* TEST */
-router.get('/test', function (req, res) {
-    res.status(200).json('Test works normally !') ;
-}) ;
-
-function getUsersByRole(req, res) {
-    let userRole = req.params.role;
-  
-    User.find({ role: userRole }, (err, user) => {
-      if (err) {
-        res.send(err);
+  user.save((error) => {
+    if (error) {
+      if (error.name.includes("MongoError") && error.code === 11000) {
+        return res.status(400).json({
+          error: "Cet email est déjà utilisé",
+          status: 400,
+          message: "utilisateur n'est pas enregitré",
+        })
       }
-      res.json(user);
-    });
+      return;
+    }
+
+    const userRetourne = {
+      _id: user._id,
+      nom: user.nom,
+      prenom: user.prenom,
+    }
+
+    return res.status(201).json({
+      data: userRetourne,
+      status: 201,
+      message: "utilisateur enregitré",
+    })
+  })
 }
 
-function getUserById(req, res) {
-    let userId = req.params.id;
-  
-    User.findById(userId, (err, user) => {
-      if (err) {
-        res.send(err);
-      }
-      res.json(user);
-    });
-}
-
-module.exports = { router, getUsersByRole, getUserById };
+module.exports = { creerUtilisateur };
