@@ -9,8 +9,7 @@ const UserSchema = new Schema({
     prenom: String,
     email: { type: String, required: true } ,
     mdp: String,
-    role: ObjectId,
-    token: String,
+    isAdmin : {type : Boolean, default : false}
 }) ;
 
 UserSchema.plugin(mongoosePaginate);

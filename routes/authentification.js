@@ -1,6 +1,7 @@
 let User = require("../model/User");
 const jwt = require("jsonwebtoken");
-const tokenKey = process.env.TOKEN_KEY;
+const tokenKey = "nyavkotesttoken";
+const bcrypt = require('bcrypt');
 
 async function log(req, res) {
   const { email, mdp } = req.body;
@@ -8,7 +9,7 @@ async function log(req, res) {
   try {
     const utilisateurTrouve = await User.findOne({ email: email });
     if (utilisateurTrouve) {
-      const motDepassvalide = await BCrypt.compare(mdp, utilisateurTrouve.mdp);
+      const motDepassvalide = await bcrypt.compare(mdp, utilisateurTrouve.mdp);
       if (motDepassvalide) {
         const token = jwt.sign(
           {
@@ -19,18 +20,21 @@ async function log(req, res) {
             expiresIn: "24h",
           }
         );
-        const { token: newToken } = await User.findOneAndUpdate(
-          { _id: utilisateurTrouve._id },
-          { token: token },
-          { new: true }
-        );
+        console.log(token)
+        // const { token: newToken } = await User.findOneAndUpdate(
+        //   { _id: utilisateurTrouve._id },
+        //   { token: token },
+        //   { new: true }
+        // );
+
+        //console.log("token", newToken)
         return res.status(200).json({
           data: {
-            token: newToken,
+            token: token,
             email: utilisateurTrouve.email,
             nom: utilisateurTrouve.nom,
             prenom: utilisateurTrouve.prenom,
-            role: utilisateurTrouve.role,
+            isAdmin: utilisateurTrouve.isAdmin,
           },
           status: 200,
           message: "User_Authentified",

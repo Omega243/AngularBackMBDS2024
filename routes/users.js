@@ -6,8 +6,7 @@ async function creerUtilisateur(req, res) {
   user.nom = req.body.nom;
   user.prenom = req.body.prenom;
   user.email = req.body.email;
-  user.mdp = await BCrypt.hash(req.body.mdp, 10);
-  user.role = req.body.role;
+  user.mdp = await bcrypt.hash(req.body.mdp, 10);
 
   user.save((error) => {
     if (error) {
@@ -25,6 +24,7 @@ async function creerUtilisateur(req, res) {
       _id: user._id,
       nom: user.nom,
       prenom: user.prenom,
+      isAdmin : user.isAdmin
     }
 
     return res.status(201).json({
