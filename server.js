@@ -2,6 +2,7 @@ let express = require("express");
 let app = express();
 let bodyParser = require("body-parser");
 let assignment = require("./routes/assignments");
+let path = require('path');
 let { creerUtilisateur } = require("./routes/users");
 let {
   log,
@@ -40,6 +41,7 @@ mongoose.connect(uri, options).then(
   }
 );
 
+app.use('/img', express.static(path.join(__dirname, 'img')));
 
 // Pour accepter les connexions cross-domain (CORS)
 app.use(function (req, res, next) {
