@@ -3,12 +3,12 @@ let Schema = mongoose.Schema;
 const mongoosePaginate = require('mongoose-aggregate-paginate-v2');
 
 let AssignmentSchema = Schema({
-    id: Number,
-    dateDeRendu: Date,
-    nom: String,
-    rendu: Boolean,
-    studentName: String,
-    studentPhoto: String
+    id: { type: Number, required: true },
+    dateDeRendu: { type: Date, required: true },
+    nom: { type: String, required: true },
+    rendu: { type: Boolean, required: true },
+    studentName: { type: String, required: true },
+    studentPhoto: { type: String, required: true }
     
 });
 
