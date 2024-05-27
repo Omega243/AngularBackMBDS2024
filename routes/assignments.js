@@ -1,4 +1,6 @@
 let Assignment = require('../model/assignment');
+let router = express.Router();
+let assignmentController = require('../controllers/assignmentController');
 
 // Récupérer tous les assignments (GET)
 /*
@@ -55,6 +57,7 @@ function postAssignment(req, res){
     assignment.nom = req.body.nom;
     assignment.dateDeRendu = req.body.dateDeRendu;
     assignment.rendu = req.body.rendu;
+    assignment.note = req.body.note;
     assignment.studentName = req.body.studentName;
     assignment.studentPhoto = req.body.studentPhoto;
 
@@ -63,20 +66,21 @@ function postAssignment(req, res){
 
     assignment.save( (err) => {
         if(err){
-            res.send('cant post assignment ', err);
+            console.error('Erreur lors de l\'enregistrement de l\'assignment:', err);
+            res.status(500).send('cant post assignment ', err);
         }
-        res.json({ message: `${assignment.nom} saved!`})
+        res.status(201).json({ message: `${assignment.nom} saved!`})
     })
 }
 
 // Update d'un assignment (PUT)
 function updateAssignment(req, res) {
-    console.log("UPDATE recu assignment : ");
+    console.log("UPDATE reçu assignment : ");
     console.log(req.body);
     Assignment.findByIdAndUpdate(req.body._id, req.body, {new: true}, (err, assignment) => {
         if (err) {
             console.log(err);
-            res.send(err)
+            res.status(500).send(err)
         } else {
           res.json({message: 'updated'})
         }
@@ -96,6 +100,27 @@ function deleteAssignment(req, res) {
         }
         res.json({message: `${assignment.nom} deleted`});
     })
+}
+
+async function markAsRendu(assignmentId, note) {
+    try {
+        let assignment = await Assignment.findById(assignmentId);
+        if (!assignment) {
+            throw new Error('Assignment not found');
+        }
+
+        if (note === undefined || note === null) {
+            throw new Error('Une note est requise pour marquer le devoir comme rendu');
+        }
+
+        assignment.note = note;
+        assignment.rendu = true;
+        
+        await assignment.save();
+        console.log('Assignment marqué comme rendu');
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
 }
 
 // let newAssignment = new Assignment({
@@ -132,6 +157,6 @@ function deleteAssignment(req, res) {
 //     }
 // });
 
+router.put('/:id/note', assignmentController.updateAssignmentNote);
 
-
-module.exports = { getAssignments, postAssignment, getAssignment, updateAssignment, deleteAssignment };
+module.exports = { getAssignments, postAssignment, getAssignment, updateAssignment, deleteAssignment, markAsRendu };
