@@ -1,6 +1,4 @@
 let Assignment = require('../model/assignment');
-let router = express.Router();
-let assignmentController = require('../controllers/assignmentController');
 
 // Récupérer tous les assignments (GET)
 /*
@@ -95,40 +93,5 @@ function deleteAssignment(req, res) {
     })
 }
 
-// let newAssignment = new Assignment({
-//     id: 7,
-//     dateDeRendu: new Date(),
-//     nom: "Devoir de mathématiques",
-//     rendu: false,
-//     studentName: "Lafatra Ravaka",
-//     studentPhoto: "img/lafatra.png"
-// });
-
-// let newAssignment2 = new Assignment({
-//     id: 8,
-//     dateDeRendu: new Date(),
-//     nom: "Devoir de méthodologie de recherche",
-//     rendu: false,
-//     studentName: "Ando Fitahiana",
-//     studentPhoto: "img/ando.png"
-// });
-
-// newAssignment.save((err) => {
-//     if (err) {
-//         console.error('Erreur lors de la sauvegarde du devoir:', err);
-//     } else {
-//         console.log('Devoir de mathématiques sauvegardé avec succès!');
-
-//         newAssignment2.save((err) => {
-//             if (err) {
-//                 console.error('Erreur lors de la sauvegarde du devoir 2:', err);
-//             } else {
-//                 console.log('Devoir de méthodologie de recherche sauvegardé avec succès!');
-//             }
-//         });
-//     }
-// });
-
-router.put('/:id/note', assignmentController.updateAssignmentNote);
 
 module.exports = { getAssignments, postAssignment, getAssignment, updateAssignment, deleteAssignment };
