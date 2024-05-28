@@ -1,5 +1,5 @@
 let Assignment = require('../model/assignment');
-let router = express.Router();
+// let router = express.Router();
 let assignmentController = require('../controllers/assignmentController');
 
 // Récupérer tous les assignments (GET)
@@ -157,6 +157,6 @@ async function markAsRendu(assignmentId, note) {
 //     }
 // });
 
-router.put('/:id/note', assignmentController.updateAssignmentNote);
+// router.put('/:id/note', assignmentController.updateAssignmentNote);
 
 module.exports = { getAssignments, postAssignment, getAssignment, updateAssignment, deleteAssignment, markAsRendu };
