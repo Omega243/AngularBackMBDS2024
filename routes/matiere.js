@@ -3,7 +3,7 @@ const Matiere = require("../model/matiere");
 const Prof = require("../model/prof");
 
 // Récuperer tous les matieres (GET)
-function getMatiere(req, res) {
+function getMatiereSansPagination(req, res) {
 
     Matiere.find((err, matieres) => {
         if (err) {
@@ -38,4 +38,4 @@ function postMatiere(req, res) {
     });
 }
 
-module.exports = { getMatiere, postMatiere };
+module.exports = { getMatiereSansPagination, postMatiere };

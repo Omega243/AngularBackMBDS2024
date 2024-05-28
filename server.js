@@ -80,7 +80,7 @@ app
 
 
 app.route(prefix + "/matiere")
-  .get(matiere.getMatiere)
+  .get(matiere.getMatiereSansPagination)
   .post(matiere.postMatiere);
 
 app.route(prefix + "/users").post(creerUtilisateur);
