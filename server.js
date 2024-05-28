@@ -2,6 +2,7 @@ let express = require("express");
 let app = express();
 let bodyParser = require("body-parser");
 let assignment = require("./routes/assignments");
+let matiere = require("./routes/matiere");
 let path = require('path');
 let { creerUtilisateur } = require("./routes/users");
 let {
@@ -64,9 +65,6 @@ let port = process.env.PORT || 8010;
 // les routes
 const prefix = "/api";
 
-//app.use(prefix + '/users', require('./routes/users'));
-
-// http://serveur..../assignments
 app
   .route(prefix + "/assignments")
   .post(assignment.postAssignment)
@@ -78,6 +76,11 @@ app
   .route(prefix + "/assignments/:id")
   .get(assignment.getAssignment)
   .delete(assignment.deleteAssignment);
+
+
+app.route(prefix + "/matiere")
+  .get(matiere.getMatiere)
+  .post(matiere.postMatiere);
 
 app.route(prefix + "/users").post(creerUtilisateur);
 
