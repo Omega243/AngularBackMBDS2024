@@ -7,6 +7,7 @@ let AssignmentSchema = Schema({
     dateDeRendu: { type: Date, required: true },
     nom: { type: String, required: true },
     rendu: { type: Boolean, required: true },
+    note: { type: Number, required: true },
     studentName: { type: String, required: true },
     studentPhoto: { type: String, required: true }
     
