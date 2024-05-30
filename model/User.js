@@ -1,16 +1,4 @@
-const mongoose = require('mongoose') ;
-const Schema = mongoose.Schema ;
-const ObjectId = require("mongodb").ObjectId ;
-const mongoosePaginate = require('mongoose-aggregate-paginate-v2');
+var mongoose = require('mongoose');  
+const UserSchema  = require('../schema/user.schema');
 
-const UserSchema = new Schema({
-    id: Number,
-    nom: String, 
-    prenom: String,
-    email: { type: String, required: true } ,
-    mdp: String,
-    isAdmin : {type : Boolean, default : false}
-}) ;
-
-UserSchema.plugin(mongoosePaginate);
-module.exports = mongoose.model("User", UserSchema) ;
+module.exports = mongoose.model('user',UserSchema);

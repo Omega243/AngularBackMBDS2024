@@ -47,34 +47,51 @@ function getAssignment(req, res) {
 
 // Ajout d'un assignment (POST)
 async function postAssignment(req, res) {
-  let assignment = new Assignment();
-  assignment.nom = req.body.nom;
-  assignment.dateDeRendu = req.body.dateDeRendu;
-  assignment.rendu = false;
-  assignment.remarque = req.body.remarque;
-  
-  let auteur = new Auteur()
-  auteur.nom = req.body.auteur.nom;
-  auteur.photo = req.body.auteur.photo;
-  auteur.save();
-  assignment.auteur = auteur;
-
-  let matiere = new Matiere();
-  matiere.nom = req.body.matiere.nom;
-  matiere.photo = req.body.matiere.photo;
-  matiere.save();
-  assignment.matiere = matiere;
-
-  console.log("POST assignment reçu :");
-  console.log(assignment);
-
-  assignment.save((err) => {
-    if (err) {
-      res.send("cant post assignment ", err);
+  try {
+    // Check if necessary fields are provided in the request body
+    if (!req.body.nom || !req.body.dateDeRendu || !req.body.auteur || !req.body.matiere) {
+      return res.status(400).send("Missing required fields");
     }
+
+    let assignment = new Assignment();
+    assignment.nom = req.body.nom;
+    assignment.dateDeRendu = req.body.dateDeRendu;
+    assignment.rendu = false;
+    assignment.remarque = req.body.remarque;
+
+    // Validate and create Auteur
+    let auteur = new Auteur();
+    if (req.body.auteur.nom && req.body.auteur.photo) {
+      auteur.nom = req.body.auteur.nom;
+      auteur.photo = req.body.auteur.photo;
+      await auteur.save();
+      assignment.auteur = auteur;
+    } else {
+      return res.status(400).send("Missing author details");
+    }
+
+    // Validate and create Matiere
+    let matiere = new Matiere();
+    if (req.body.matiere.nom && req.body.matiere.photo) {
+      matiere.nom = req.body.matiere.nom;
+      matiere.photo = req.body.matiere.photo;
+      await matiere.save();
+      assignment.matiere = matiere;
+    } else {
+      return res.status(400).send("Missing subject details");
+    }
+
+    console.log("POST assignment reçu :");
+    console.log(assignment);
+
+    // Save assignment
+    await assignment.save();
     res.json({ message: `${assignment.nom} saved!` });
-  });
+  } catch (err) {
+    res.status(500).send("Error saving assignment: " + err.message);
+  }
 }
+
 
 // Update d'un assignment (PUT)
 function updateAssignment(req, res) {
