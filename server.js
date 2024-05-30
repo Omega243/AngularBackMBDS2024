@@ -9,6 +9,8 @@ let mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const uri = 'mongodb+srv://kevinandrianasolo:kpYVPuKME23EDbq0@cluster0.l8mbyvu.mongodb.net/assignments?retryWrites=true&w=majority';
+//const uri = 'mongodb+srv://nandrianinaomega:miagembds@cluster0.vkxoifz.mongodb.net/assignments?retryWrites=true&w=majority&appName=Cluster0';
+//const uri = 'mongodb+srv://avoko:avokombds@cluster0.ydvhi7q.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 const options = {
   useNewUrlParser: true,
