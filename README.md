@@ -1,6 +1,6 @@
 # AngularMBDSMadagascar2024
 ## Membres du groupe 6 :
-- N°07, DINAMPANDRESENA Nandrianina Oméga 
+- N°06, DINAMPANDRESENA Nandrianina Oméga 
 - N°09, NIVOARISON Salohy Ny Avoko
 
 ## Repositories :
