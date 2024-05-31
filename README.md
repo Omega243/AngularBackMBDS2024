@@ -8,8 +8,11 @@
 - FRONT: https://github.com/Omega243/AngularFrontMBDSMada2024.git
 
 ## CONNEXION Credentials
-- Admin : admin@gmail.com / Password : test
+- Admin : admin@gmail.com / Password : admin
 - User : dina@gmail.com / Password : test
+
+## Lien du projet testable sur render.com
+https://angularfrontmbdsmada2024.onrender.com
 
 ## Lien du cours :
 >http://miageprojet2.unice.fr/Intranet_de_Michel_Buffa/M2_Miage_MBDS_Madagascar_2023-2024_-_Intro_to_Angular
